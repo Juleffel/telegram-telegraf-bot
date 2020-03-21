@@ -57,9 +57,12 @@ typings/
 # dotenv environment variables file
 
 
-
-
 # START: Project files
+
+assets/
+build/
+data/
+.idea/
 
 config.js
 

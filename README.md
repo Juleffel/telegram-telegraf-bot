@@ -1,16 +1,14 @@
 # Telegram Bot in Node.JS, using Telegraf
 
 ## What is this repository about?
-This repository lets you run and configure a Telegram bot, easily, in order to interact with user input and manage data.
+It is a fork of `fabnicolas/telegram-telegraf-bot` meant to create a high level bot controllable from a dataset (see `src/bot-dataset` for example). It has multiple features as:
+- Dialog conditions as "hear certain words", "wait for a certain time", "has this variable set to"...
+- Sync and Async effects which will write into runtimeData
+- Save state of dialogs as disk files / retrieve them later at startup
+- Send images to Telegram and automatically cache fileId returned by Telegram
+- Calculate next message by intelligent function
 
-This repository is an upgraded version of the old one with totally different package. Contents in README are similar because this repository provide additional features.
-
-I've decided to try out `telegraf` NPM package since it supports Telegram API v3.1+ which includes cool features like `game` support and `inline mode` (used in this sample) and had more informations and better documentation than the previous package `telegram-api`, still useful for text handling. NPM `telegraf` package is also capable of handling media files (audio, gif, etc.).
-
-So: if you ONLY need a text bot, my previous repository is still fine and it is very simple to use.
-If you need many more features, go with this repository.
-
-Also for this project I used `node v8.0.0`. Old project supported `node v4.0.0` thanks to Babel and its ES6 transpilation/polyfill. If your environment suits higher node versions or you are capable to upgrade to `node v8.0.0` (I'll also show in this README how to do it), go for this repository. If it's not the case, go for the previous one.
+The goal is to be able to develop bots quickly writing only the dataset and reusing the logic.
 
 ## How to create the bot
 
@@ -44,11 +42,9 @@ npm start
 ```
 If it prints:
 ```
-[SERVER] Bot started.
+Server has initialized bot nickname ! Nick: xxx
 ```
 ...congratulations! Now bot will do what you want.
-
-![image](http://i.imgur.com/v6fmG6f.png)
 
 ## Secure your API key
 In .gitignore:
@@ -64,27 +60,8 @@ If your key gets stolen --- Bad things could happen with your bot.
 If you're working on this repository with someone else, I suggest to NOT publish config.js but to share your configuration file privately with your collaborators OR let them build their own 'bot-users' with their own API keys.
 
 # Documentation
-I have personally commented my own code in order to make things as much clear as possible.
-
-The file index.js is a loader for app.js file. To change your bot behavior, change app.js accordingly.
-
-For example, listening a command:
-```javascript
-// Command example, pretty easy. Each callback passes as parameter the context.
-// Context data includes message info, timestamp, etc; check the official documentation or print ctx.
-bot.command('start', (ctx) => ctx.reply('Bot started.'));
-```
-
-Hear a word in a sentence:
-```javascript
-// Hears, instead of command, check if the given word or regexp is CONTAINED in user input.
-bot.hears('ymca', (ctx) => ctx.reply("*sing* It's fun to stay at the Y.M.C.A.!"));
-```
-
-You can also use regexp, for example this one checks case-insensitive version of the word:
-```javascript
-bot.hears(/torino/i, (ctx) => ctx.reply("Someone said Torino!?"));
-```
-
 For more informations, check Telegraf API: https://github.com/telegraf/telegraf.
-For inline support results, check: https://core.telegram.org/bots/api#inlinequeryresult.
+For Telegram API, check: https://core.telegram.org/bots/api
+
+# Tests
+You can run `npm test`

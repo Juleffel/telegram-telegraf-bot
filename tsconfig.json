@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./build"
+  },
+  "exclude" : [
+    "./build",
+    "./node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}

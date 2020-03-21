@@ -1,1 +1,1 @@
-require('./bot');
+require('./build/bot');
